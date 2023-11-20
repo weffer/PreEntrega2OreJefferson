@@ -18,7 +18,7 @@ function preEntrega2() {
       } else if (opcion == 4) {
         ejecutarOpcion4();
       } else if (opcion == 5) {
-        alert("Esta opcion volvera a limpiar todos los objectos de JS");
+        alert("Esta opcion volvera a limpiar todos los objetos de JS");
         location.reload();
       } else {
         alert("Se cerro la operación!!!");
