@@ -219,6 +219,26 @@ function ejecutarOpcion3() {
 
 //Funcion para ejecutar la opcion 4
 function ejecutarOpcion4() {
+  let mensaje = "1- Mostrar en alert el resultado. \n2- Mostrar en el HTML.";
+  let opcion = parseInt(prompt(mensaje));
+  debugger;
+  if (!isNaN(opcion)) {
+    if (opcion >= 1 && opcion <= 2) {
+      if (opcion == 1) {
+        ejecutarOpcion4Alert();
+      } else {
+        ejecutarOpcion4HTML();
+      }
+    } else {
+      alert("Ingrese un numero correcto entre el 1 y 2");
+    }
+  } else {
+    alert("El valor ingresado no es un numero, ingrese un numero correcto");
+    ejecutarOpcion4();
+  }
+}
+
+function ejecutarOpcion4Alert() {
   if (arrayProductos.length > 0) {
     let listadoProductos = "Listado de Productos: \n";
     let precioTotal = 0;
@@ -238,6 +258,48 @@ function ejecutarOpcion4() {
       `\n\nPrecio Total a Pagar de todos los productos : ${precioTotal} `;
     alert(listadoProductos);
     preEntrega2();
+  } else {
+    alert(
+      "No tienes productos, Seleccione la opcion 1 para agregar productos!!!"
+    );
+    preEntrega2();
+  }
+}
+
+function ejecutarOpcion4HTML() {
+  debugger;
+  if (arrayProductos.length > 0) {
+    let precioTotal = 0;
+    let cantidadTotal = 0;
+    let mensaje = `<h1>Listado de Productos</h1>
+                   <table border='1'>
+                    <thead>
+                      <tr>
+                        <th>Codigo</th>
+                        <th>Descripcion</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                   <tbody>`;
+    arrayProductos.forEach((producto) => {
+      precioTotal += producto.precio * producto.cantidad;
+      cantidadTotal += producto.cantidad;
+      mensaje += `<tr>
+                    <td>${producto.id}</td>
+                    <td>${producto.descripcion}</td>
+                    <td>${producto.cantidad}</td>
+                    <td>${producto.precio * producto.cantidad}</td>
+                  </tr>`;
+    });
+    mensaje += `</tbody>
+              </table>
+              <h2>Precio Total: ${precioTotal}</h2>
+              <h2>Cantidad Total: ${cantidadTotal}</h2>
+              <button onclick='location.reload();'>Volver a Iniciar</button>`;
+
+    document.querySelector("#inicio").innerHTML = mensaje;
+    console.log(mensaje);
   } else {
     alert(
       "No tienes productos, Seleccione la opcion 1 para agregar productos!!!"
